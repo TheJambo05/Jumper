@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:jumper/logic/cubits/order_cubit/order_state.dart';
 import '../../../data/models/cart/cart_item_model.dart';
 import '../../../data/models/order/order_model.dart';
 import '../../services/calculations.dart';
+import '../cart_cubit/cart_cubit.dart';
 import '../user_cubit/user_cubit.dart';
 import '../user_cubit/user_state.dart';
 import './../../../data/repositories/order_repository.dart';
@@ -53,7 +53,7 @@ class OrderCubit extends Cubit<OrderState> {
 
       OrderModel newOrder = OrderModel(
           items: items,
-          // totalAmount: Calculations.cartTotal(items),
+          totalAmount: Calculations.cartTotal(items),
           user: (_userCubit.state as UserLoggedInState).userModel,
           status: (paymentMethod == "pay-on-delivery")
               ? "order-placed"
@@ -74,11 +74,11 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<bool> updateOrder(OrderModel orderModel) async {
+  Future<bool> updateOrder(OrderModel orderModel,
+      {String? paymentId, String? signature}) async {
     try {
-      OrderModel updatedOrder = await _orderRepository.updateOrder(
-        orderModel,
-      );
+      OrderModel updatedOrder = await _orderRepository.updateOrder(orderModel,
+          paymentId: paymentId, signature: signature);
 
       int index = state.orders.indexOf(updatedOrder);
       if (index == -1) return false;

@@ -38,22 +38,56 @@ class CartListView extends StatelessWidget {
             children: [
               Text(
                   "${Formatter.formatPrice(item.product!.price!)} x ${item.quantity} = ${Formatter.formatPrice(item.product!.price! * item.quantity!)}"),
-              LinkButton(
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red.shade300,
+                ),
                 onPressed: () {
-                  BlocProvider.of<CartCubit>(context)
-                      .removeFromCart(item.product!);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Confirmation"),
+                        content: const Text(
+                            "Are you sure you want to remove this item from your cart?"),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close the dialog
+                            },
+                            child: const Text(
+                              "No",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // Remove the item from the cart
+                              BlocProvider.of<CartCubit>(context)
+                                  .removeFromCart(item.product!);
+                              Navigator.of(context).pop(); // Close the dialog
+                            },
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
-                text: "Delete",
-                color: Colors.red,
               ),
             ],
           ),
           trailing: InputQty(
+            qtyFormProps: const QtyFormProps(enableTyping: false),
+            minVal: 1,
             maxVal: 99,
             initVal: item.quantity!,
-            minVal: 1,
             onQtyChanged: (value) {
-              if (value == item.quantity) return;
+              if (value != item.quantity) return;
               BlocProvider.of<CartCubit>(context)
                   .addToCart(item.product!, value as int);
             },

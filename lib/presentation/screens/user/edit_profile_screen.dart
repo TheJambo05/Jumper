@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
@@ -95,13 +95,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           labelText: "City",
         ),
         const GapWidget(),
-        PrimaryTextField(
-          initialValue: userModel.state,
-          onChanged: (value) {
-            userModel.state = value;
-          },
-          labelText: "State",
-        ),
         const GapWidget(),
         PrimaryButton(
             onPressed: () async {

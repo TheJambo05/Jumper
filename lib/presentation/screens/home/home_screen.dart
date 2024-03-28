@@ -2,7 +2,6 @@ import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/home/product_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/home/user_feed_screen.dart';
@@ -12,6 +11,7 @@ import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
 import '../cart/cart_screen.dart';
+import '../order/my_order_screen.dart';
 import '../splash/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     ProductScreen(),
-    CategoryScreen(),
+    MyOrderScreen(),
+    // CategoryScreen(),
     ProfileScreen()
   ];
 
@@ -42,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Jumper",
+                "Jumper", 
               ),
             ],
           ),

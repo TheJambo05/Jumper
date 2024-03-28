@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/presentation/screens/auth/providers/login_provider.dart';
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
 import 'package:provider/provider.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
 import '../../widgets/gap_widget.dart';

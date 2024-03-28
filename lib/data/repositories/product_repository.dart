@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:jumper/data/models/user/user_model.dart';
 import '../../core/api.dart';
 import '../models/product/product_model.dart';
 
@@ -27,6 +28,25 @@ class ProductRepository {
     try {
       Response response =
           await _api.sendRequest.get("/product/category/$categoryId");
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return (apiResponse.data as List<dynamic>)
+          .map((json) => ProductModel.fromJson(json))
+          .toList();
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsById(String userId) async {
+    try {
+      Response response =
+          await _api.sendRequest.get("/product/category/$userId");
 
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
 

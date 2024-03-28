@@ -6,6 +6,7 @@ class AppColors {
   static Color textLight = const Color(0xff8a8a8a);
   static Color white = const Color(0xffffffff);
   static Color black = const Color(0xff000000);
+  static Color amber = const Color(0xffffbf00);
 }
 
 class Themes {
@@ -39,4 +40,11 @@ class TextStyles {
 
   static TextStyle body2 = TextStyle(
       fontWeight: FontWeight.normal, color: AppColors.text, fontSize: 16);
+
+  static TextStyle customHeadingStyle = TextStyle(
+      fontFamily:
+          'YourCustomFont', // Replace 'YourCustomFont' with your actual font family
+      fontWeight: FontWeight.bold,
+      color: AppColors.text,
+      fontSize: 32); // Adjust the font size as needed
 }

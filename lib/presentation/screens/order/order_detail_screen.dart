@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:jumper/presentation/screens/order/order_placed_screen.dart';
 import 'package:jumper/presentation/screens/order/providers/order_detail_provider.dart';
-import 'package:provider/provider.dart';
-import '../../../core/ui.dart';
+
+import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../../logic/cubits/cart_cubit/cart_state.dart';
@@ -12,12 +13,10 @@ import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
 import '../../widgets/cart_list_view.dart';
 import '../../widgets/gap_widget.dart';
-import '../../widgets/link_button.dart';
 import '../../widgets/primary_button.dart';
-import '../user/edit_profile_screen.dart';
 
 class OrderDetailScreen extends StatefulWidget {
-  const OrderDetailScreen({super.key});
+  const OrderDetailScreen({Key? key});
 
   static const routeName = "order_detail";
 
@@ -30,164 +29,137 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("New Order"),
+        title: const Text("Order Details"),
       ),
       body: SafeArea(
-          child: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          BlocBuilder<UserCubit, UserState>(
-            builder: (context, state) {
-              if (state is UserLoadingState) {
-                return const CircularProgressIndicator();
-              }
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "User Details",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              BlocBuilder<UserCubit, UserState>(
+                builder: (context, state) {
+                  if (state is UserLoadingState) {
+                    return const CircularProgressIndicator();
+                  }
 
-              if (state is UserLoggedInState) {
-                UserModel user = state.userModel;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "User Details",
-                      style: TextStyles.body2
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const GapWidget(),
-                    Text("${user.fullName}", style: TextStyles.heading3),
-                    Text(
-                      "Email: ${user.email}",
-                      style: TextStyles.body2,
-                    ),
-                    Text(
-                      "Phone: ${user.phoneNumber}",
-                      style: TextStyles.body2,
-                    ),
-                    Text(
-                      "Address: ${user.address}, ${user.city}, ${user.state}",
-                      style: TextStyles.body2,
-                    ),
-                    LinkButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, EditProfileScreen.routeName);
-                        },
-                        text: "Edit Profile"),
-                  ],
-                );
-              }
+                  if (state is UserLoggedInState) {
+                    UserModel user = state.userModel;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Name: ${user.fullName}",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          "Email: ${user.email}",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          "Phone: ${user.phoneNumber}",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          "Address: ${user.address}, ${user.city}, ${user.state}",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    );
+                  }
 
-              if (state is UserErrorState) {
-                return Text(state.message);
-              }
+                  if (state is UserErrorState) {
+                    return Text(
+                      state.message,
+                      style: const TextStyle(fontSize: 16),
+                    );
+                  }
 
-              return const SizedBox();
-            },
-          ),
-          const GapWidget(size: 10),
-          Text(
-            "Items",
-            style: TextStyles.body2.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const GapWidget(),
-          BlocBuilder<CartCubit, CartState>(
-            builder: (context, state) {
-              if (state is CartLoadingState && state.items.isEmpty) {
-                return const CircularProgressIndicator();
-              }
+                  return const SizedBox();
+                },
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Items",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    if (state is CartLoadingState && state.items.isEmpty) {
+                      return const CircularProgressIndicator();
+                    }
 
-              if (state is CartErrorState && state.items.isEmpty) {
-                return Text(state.message);
-              }
+                    if (state is CartErrorState && state.items.isEmpty) {
+                      return Text(
+                        state.message,
+                        style: const TextStyle(fontSize: 16),
+                      );
+                    }
 
-              return CartListView(
-                items: state.items,
-                shrinkWrap: true,
-                noScroll: true,
-              );
-            },
-          ),
-          const GapWidget(size: 10),
-          Text(
-            "Payment",
-            style: TextStyles.body2.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const GapWidget(),
-          Consumer<OrderDetailProvider>(builder: (context, provider, child) {
-            return Column(
-              children: [
-                RadioListTile(
-                  value: "pay-on-delivery",
-                  groupValue: provider.paymentMethod,
-                  contentPadding: EdgeInsets.zero,
-                  onChanged: provider.changePaymentMethod,
-                  title: const Text("Pay on Delivery"),
+                    return CartListView(
+                      items: state.items,
+                      shrinkWrap: true,
+                      noScroll: true,
+                    );
+                  },
                 ),
-                RadioListTile(
-                  value: "pay-now",
-                  groupValue: provider.paymentMethod,
-                  contentPadding: EdgeInsets.zero,
-                  onChanged: provider.changePaymentMethod,
-                  title: const Text("Pay Now"),
-                ),
-              ],
-            );
-          }),
-          const GapWidget(),
-          PrimaryButton(
-              onPressed: () async {
-                bool success = await BlocProvider.of<OrderCubit>(context)
-                    .createOrder(
-                        items: BlocProvider.of<CartCubit>(context).state.items,
-                        paymentMethod: Provider.of<OrderDetailProvider>(context,
-                                listen: false)
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Payment",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Consumer<OrderDetailProvider>(
+                builder: (context, provider, child) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RadioListTile(
+                        value: "pay-on-delivery",
+                        groupValue: provider.paymentMethod,
+                        onChanged: provider.changePaymentMethod,
+                        title: const Text("Pay on Delivery"),
+                      ),
+                      RadioListTile(
+                        value: "pay-now",
+                        groupValue: provider.paymentMethod,
+                        onChanged: provider.changePaymentMethod,
+                        title: const Text("Pay Now"),
+                      ),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              PrimaryButton(
+                onPressed: () async {
+                  bool success =
+                      await BlocProvider.of<OrderCubit>(context).createOrder(
+                    items: BlocProvider.of<CartCubit>(context).state.items,
+                    paymentMethod:
+                        Provider.of<OrderDetailProvider>(context, listen: false)
                             .paymentMethod
-                            .toString());
-                if (success) {
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushNamed(context, OrderPlacedScreen.routeName);
-                }
-
-                // OrderModel? newOrder =
-                //     await BlocProvider.of<OrderCubit>(context).createOrder(
-                //   items: BlocProvider.of<CartCubit>(context).state.items,
-                //   paymentMethod:
-                //       Provider.of<OrderDetailProvider>(context, listen: false)
-                //           .paymentMethod
-                //           .toString(),
-                // );
-
-                // if (newOrder == null) return;
-
-                // if (newOrder.status == "payment-pending") {
-                //   await RazorPayServices.checkoutOrder(newOrder,
-                //       onSuccess: (response) async {
-                //     newOrder.status = "order-placed";
-
-                //     bool success = await BlocProvider.of<OrderCubit>(context)
-                //         .updateOrder(newOrder,
-                //             paymentId: response.paymentId,
-                //             signature: response.signature);
-
-                //     if (!success) {
-                //       log("Can't update the order!");
-                //       return;
-                //     }
-
-                //     Navigator.popUntil(context, (route) => route.isFirst);
-                //     Navigator.pushNamed(context, OrderPlacedScreen.routeName);
-                //   }, onFailure: (response) {
-                //     log("Payment Failed!");
-                //   });
-                // }
-
-                // if (newOrder.status == "order-placed") {
-                //   Navigator.popUntil(context, (route) => route.isFirst);
-                //   Navigator.pushNamed(context, OrderPlacedScreen.routeName);
-                // }
-              },
-              text: "Place Order"),
-        ],
-      )),
+                            .toString(),
+                  );
+                  if (success) {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushNamed(context, OrderPlacedScreen.routeName);
+                  }
+                },
+                text: "Place Order",
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../logic/cubits/order_cubit/order_cubit.dart';
 import '../../../logic/cubits/order_cubit/order_state.dart';
 import '../../../logic/services/calculations.dart';

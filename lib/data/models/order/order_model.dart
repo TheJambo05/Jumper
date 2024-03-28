@@ -7,6 +7,7 @@ class OrderModel extends Equatable {
   UserModel? user;
   List<CartItemModel>? items;
   String? status;
+  double? totalAmount;
   DateTime? updatedOn;
   DateTime? createdOn;
 
@@ -15,6 +16,7 @@ class OrderModel extends Equatable {
       this.user,
       this.items,
       this.status,
+      this.totalAmount,
       this.updatedOn,
       this.createdOn});
 
@@ -25,6 +27,7 @@ class OrderModel extends Equatable {
         .map((item) => CartItemModel.fromJson(item))
         .toList();
     status = json['status'];
+    totalAmount = double.tryParse(json['totalAmount'].toString());
     updatedOn = DateTime.tryParse(json['updatedOn']);
     createdOn = DateTime.tryParse(json['createdOn']);
   }
@@ -36,6 +39,7 @@ class OrderModel extends Equatable {
     data['items'] =
         items!.map((item) => item.toJson(objectMode: true)).toList();
     data['status'] = this.status;
+    data['totalAmount'] = this.totalAmount;
     data['updatedOn'] = this.updatedOn?.toIso8601String();
     data['createdOn'] = this.createdOn?.toIso8601String();
     return data;

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:input_quantity/input_quantity.dart';
 
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/services/calculations.dart';
@@ -81,7 +81,7 @@ class _CartScreenState extends State<CartScreen> {
                         },
                         padding: EdgeInsets.all(
                             MediaQuery.of(context).size.width / 22),
-                        color: AppColors.accent,
+                        color: AppColors.black,
                         child: const Text("Place Order"),
                       ),
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/category_product_cubit/category_product_state.dart';
 import '../../../data/models/category/category_model.dart';
 import '../../../data/repositories/product_repository.dart';
-import 'category_product_state.dart';
 
 class CategoryProductCubit extends Cubit<CategoryProductState> {
   final CategoryModel category;

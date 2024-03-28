@@ -1,8 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../widgets/gap_widget.dart';
 import '../../widgets/link_button.dart';
 import '../../widgets/primary_button.dart';
@@ -89,7 +90,11 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 Text("Already have an account?", style: TextStyles.body2),
                 const GapWidget(),
-                LinkButton(onPressed: () {}, text: "Log In")
+                LinkButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.routeName);
+                    },
+                    text: "Log In")
               ],
             ),
           ]),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import '../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../logic/cubits/user_cubit/user_state.dart';
 import '../screens/auth/login_screen.dart';
@@ -63,7 +64,7 @@ class SideDrawer extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    // Add navigation logic here
+                    Navigator.pushNamed(context, ProfileScreen.routeName);
                     Navigator.pop(context); // Close the drawer
                   },
                 ),

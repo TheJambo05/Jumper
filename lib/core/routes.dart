@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:provider/provider.dart';
 import '../data/models/category/category_model.dart';
 import '../data/models/product/product_model.dart';
@@ -36,6 +37,9 @@ class Routes {
 
       case HomeScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const HomeScreen());
+
+      case ProfileScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => const ProfileScreen());
 
       case SplashScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const SplashScreen());

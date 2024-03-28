@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../core/ui.dart';
+import '../../core/design.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;

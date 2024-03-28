@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
@@ -11,6 +11,8 @@ import '../user/edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  static const String routeName = "profile_screen";
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -73,17 +75,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               "My Orders",
               style: TextStyles.body1,
             )),
-        ListTile(
-            onTap: () {
-              BlocProvider.of<UserCubit>(context).signOut();
-            },
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(
-              Icons.exit_to_app,
-              color: Colors.red,
-            ),
-            title: Text("Sign Out",
-                style: TextStyles.body1.copyWith(color: Colors.red))),
       ],
     );
   }

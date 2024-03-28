@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import '../../../core/ui.dart';
+import '../../../core/design.dart';
 import '../../../data/models/product/product_model.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../../logic/cubits/cart_cubit/cart_state.dart';
@@ -72,7 +72,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               .addToCart(widget.productModel, 1);
                         },
                         color:
-                            (isInCart) ? AppColors.textLight : AppColors.accent,
+                            (isInCart) ? AppColors.textLight : AppColors.black,
                         text: (isInCart)
                             ? "Product added to cart"
                             : "Add to Cart");

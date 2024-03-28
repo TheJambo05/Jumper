@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
 import 'core/routes.dart';
-import 'core/ui.dart';
+import 'core/design.dart';
 import 'logic/cubits/cart_cubit/cart_cubit.dart';
 import 'logic/cubits/category_cubit/category_cubit.dart';
 import 'logic/cubits/order_cubit/order_cubit.dart';
