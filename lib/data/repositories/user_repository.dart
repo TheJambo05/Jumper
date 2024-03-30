@@ -6,11 +6,24 @@ import '../models/user/user_model.dart';
 class UserRepository {
   final _api = Api();
 
-  Future<UserModel> createAccount(
-      {required String email, required String password}) async {
+  Future<UserModel> createAccount({
+    required String email,
+    required String password,
+    required String fullName,
+    required String phoneNumber,
+    required String address,
+    required String city,
+  }) async {
     try {
       Response response = await _api.sendRequest.post("/user/createAccount",
-          data: jsonEncode({"email": email, "password": password}));
+          data: jsonEncode({
+            "email": email,
+            "password": password,
+            "fullName": fullName,
+            "phoneNumber": phoneNumber,
+            "address": address,
+            "city": city,
+          }));
 
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
 

@@ -48,8 +48,6 @@ class OrderRepository {
           data: jsonEncode({
             "orderId": orderModel.sId,
             "status": orderModel.status,
-            "razorPayPaymentId": paymentId,
-            "razorPaySignature": signature
           }));
 
       ApiResponse apiResponse = ApiResponse.fromResponse(response);

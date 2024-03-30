@@ -74,11 +74,13 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<bool> updateOrder(OrderModel orderModel,
-      {String? paymentId, String? signature}) async {
+  Future<bool> updateOrder(
+    OrderModel orderModel,
+  ) async {
     try {
-      OrderModel updatedOrder = await _orderRepository.updateOrder(orderModel,
-          paymentId: paymentId, signature: signature);
+      OrderModel updatedOrder = await _orderRepository.updateOrder(
+        orderModel,
+      );
 
       int index = state.orders.indexOf(updatedOrder);
       if (index == -1) return false;

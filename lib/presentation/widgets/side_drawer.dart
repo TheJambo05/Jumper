@@ -1,12 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
+import 'package:jumper/presentation/screens/order/my_order_screen.dart';
 import '../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../logic/cubits/user_cubit/user_state.dart';
 import '../screens/auth/login_screen.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});
+
+  static const String routeName = "side_drawer";
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +72,22 @@ class SideDrawer extends StatelessWidget {
                     Navigator.pop(context); // Close the drawer
                   },
                 ),
-                // Add other ListTiles for settings, change password, help & feedback
-                // ...
+                ListTile(
+                  leading: const Icon(
+                    CupertinoIcons.cube_box_fill,
+                    color: Colors.black,
+                  ),
+                  title: const Text(
+                    'Orders',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, MyOrderScreen.routeName);
+                    Navigator.pop(context); // Close the drawer
+                  },
+                ),
                 ListTile(
                   leading: const Icon(
                     Icons.logout,

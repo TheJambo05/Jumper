@@ -40,6 +40,16 @@ class _SignupScreenState extends State<SignupScreen> {
                 : const SizedBox(),
             const GapWidget(size: 5),
             PrimaryTextField(
+                controller: provider.fullNameController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Your Name is required!";
+                  }
+                  return null;
+                },
+                labelText: "Your Name"),
+            const GapWidget(),
+            PrimaryTextField(
                 controller: provider.emailController,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -53,6 +63,36 @@ class _SignupScreenState extends State<SignupScreen> {
                   return null;
                 },
                 labelText: "Email Address"),
+            const GapWidget(),
+            PrimaryTextField(
+                controller: provider.addressController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Address is required!";
+                  }
+                  return null;
+                },
+                labelText: "Your Address"),
+            const GapWidget(),
+            PrimaryTextField(
+                controller: provider.cityController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Your City name is required!";
+                  }
+                  return null;
+                },
+                labelText: "Current City"),
+            const GapWidget(),
+            PrimaryTextField(
+                controller: provider.phoneNumberController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Phone Number is required!";
+                  }
+                  return null;
+                },
+                labelText: "Contact Number"),
             const GapWidget(),
             PrimaryTextField(
                 controller: provider.passwordController,

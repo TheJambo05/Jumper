@@ -16,6 +16,10 @@ class SignupProvider with ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
+  final fullNameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final addressController = TextEditingController();
+  final cityController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   StreamSubscription? _userSubscription;
 
@@ -43,9 +47,18 @@ class SignupProvider with ChangeNotifier {
 
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
-
-    BlocProvider.of<UserCubit>(context)
-        .createAccount(email: email, password: password);
+    String fullName = fullNameController.text.trim();
+    String phoneNumber = phoneNumberController.text.trim();
+    String address = addressController.text.trim();
+    String city = cityController.text.trim();
+    BlocProvider.of<UserCubit>(context).createAccount(
+      email: email,
+      password: password,
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      address: address,
+      city: city,
+    );
   }
 
   @override

@@ -16,7 +16,7 @@ import '../../widgets/gap_widget.dart';
 import '../../widgets/primary_button.dart';
 
 class OrderDetailScreen extends StatefulWidget {
-  const OrderDetailScreen({Key? key});
+  const OrderDetailScreen({super.key});
 
   static const routeName = "order_detail";
 
@@ -66,7 +66,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           style: const TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Address: ${user.address}, ${user.city}, ${user.state}",
+                          "Address: ${user.address}, ${user.city}",
                           style: const TextStyle(fontSize: 16),
                         ),
                       ],

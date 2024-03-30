@@ -42,11 +42,24 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void createAccount({required String email, required String password}) async {
+  void createAccount({
+    required String email,
+    required String password,
+    required String fullName,
+    required String phoneNumber,
+    required String address,
+    required String city,
+  }) async {
     emit(UserLoadingState());
     try {
-      UserModel userModel =
-          await _userRepository.createAccount(email: email, password: password);
+      UserModel userModel = await _userRepository.createAccount(
+        email: email,
+        password: password,
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        address: address,
+        city: city,
+      );
       _emitLoggedInState(
           userModel: userModel, email: email, password: password);
     } catch (ex) {

@@ -40,11 +40,4 @@ class TextStyles {
 
   static TextStyle body2 = TextStyle(
       fontWeight: FontWeight.normal, color: AppColors.text, fontSize: 16);
-
-  static TextStyle customHeadingStyle = TextStyle(
-      fontFamily:
-          'YourCustomFont', // Replace 'YourCustomFont' with your actual font family
-      fontWeight: FontWeight.bold,
-      color: AppColors.text,
-      fontSize: 32); // Adjust the font size as needed
 }
