@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/presentation/screens/admin/admin_panel.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/products.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/users.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:provider/provider.dart';
 import '../data/models/category/category_model.dart';
@@ -34,7 +37,16 @@ class Routes {
             builder: (context) => ChangeNotifierProvider(
                 create: (context) => SignupProvider(context),
                 child: const SignupScreen()));
+      ///////////////Admin/////////////////
+      case AdminPanel.routeName:
+        return CupertinoPageRoute(builder: (context) => const AdminPanel());
 
+      case Users.routeName:
+        return CupertinoPageRoute(builder: (context) => const Users());
+
+      case Products.routeName:
+        return CupertinoPageRoute(builder: (context) => const Products());
+      ///////////////User//////////////////
       case HomeScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const HomeScreen());
 

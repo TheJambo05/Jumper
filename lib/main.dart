@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/admin_cubits/user_cubit/user_list_cubit.dart';
+import 'package:jumper/presentation/screens/admin/admin_panel.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
 import 'core/routes.dart';
 import 'core/design.dart';
@@ -24,6 +26,9 @@ class Jumper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //////////Admin///////////
+        BlocProvider(create: (context) => UserListCubit()),
+        //////////User///////////
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => ProductCubit()),
@@ -40,7 +45,7 @@ class Jumper extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: Themes.defaultTheme,
           onGenerateRoute: Routes.onGenerateRoute,
-          initialRoute: SplashScreen.routeName),
+          initialRoute: AdminPanel.routeName),
     );
   }
 }

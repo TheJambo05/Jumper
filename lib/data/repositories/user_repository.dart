@@ -37,6 +37,24 @@ class UserRepository {
     }
   }
 
+  Future<List<UserModel>> fetchAllUsers() async {
+    try {
+      Response response = await _api.sendRequest.get("/user");
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return (apiResponse.data as List<dynamic>)
+          .map((json) => UserModel.fromJson(json))
+          .toList();
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
   Future<UserModel> signIn(
       {required String email, required String password}) async {
     try {
@@ -68,6 +86,25 @@ class UserRepository {
 
       return UserModel.fromJson(apiResponse.data);
     } catch (ex) {
+      rethrow;
+    }
+  }
+
+  Future<void> removeUser(String userId) async {
+    try {
+      // Send DELETE request to remove user
+      Response response = await _api.sendRequest.delete("/user/$userId");
+
+      // Check if the response is successful
+      if (response.statusCode == 200) {
+        // If successful, no need to return any data
+        return;
+      } else {
+        // If not successful, handle the error
+        throw "Failed to remove user: ${response.statusCode}";
+      }
+    } catch (ex) {
+      // Rethrow the exception to be caught at a higher level
       rethrow;
     }
   }
