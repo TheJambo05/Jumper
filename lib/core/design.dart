@@ -7,6 +7,7 @@ class AppColors {
   static Color white = const Color(0xffffffff);
   static Color black = const Color(0xff000000);
   static Color amber = const Color(0xffffbf00);
+  static Color white1 = const Color(0xFFF9F9F9);
 }
 
 class Themes {

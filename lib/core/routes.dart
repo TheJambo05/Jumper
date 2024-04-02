@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/presentation/screens/admin/admin_panel.dart';
-import 'package:jumper/presentation/screens/admin/admin_screens/products.dart';
-import 'package:jumper/presentation/screens/admin/admin_screens/users.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/dashboard/dash_board.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/products/products.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:provider/provider.dart';
 import '../data/models/category/category_model.dart';
@@ -46,6 +47,9 @@ class Routes {
 
       case Products.routeName:
         return CupertinoPageRoute(builder: (context) => const Products());
+
+      case Dashboard.routeName:
+        return CupertinoPageRoute(builder: (context) => const Dashboard());
       ///////////////User//////////////////
       case HomeScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const HomeScreen());

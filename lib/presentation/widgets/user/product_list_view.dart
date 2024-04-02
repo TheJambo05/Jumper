@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jumper/data/models/category/category_model.dart';
-import '../screens/product/category_product_screen.dart';
+import '../../screens/product/category_product_screen.dart';
 
 class ProductListView extends StatelessWidget {
   final List<CategoryModel> categories;

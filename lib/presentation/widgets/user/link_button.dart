@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../core/design.dart';
+import '../../../core/design.dart';
 
 class LinkButton extends StatelessWidget {
   final String text;

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/presentation/widgets/product_page.dart';
+import 'package:jumper/presentation/widgets/user/product_page.dart';
 import '../../../logic/cubits/category_product_cubit/category_product_cubit.dart';
 import '../../../logic/cubits/category_product_cubit/category_product_state.dart';
-import '../../widgets/product_list_view.dart';
+import '../../widgets/user/product_list_view.dart';
 
 class CategoryProductScreen extends StatefulWidget {
   const CategoryProductScreen({super.key});

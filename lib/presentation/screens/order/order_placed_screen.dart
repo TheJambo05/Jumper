@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/design.dart';
-import '../../widgets/gap_widget.dart';
+import '../../widgets/user/gap_widget.dart';
 
 class OrderPlacedScreen extends StatefulWidget {
   const OrderPlacedScreen({super.key});

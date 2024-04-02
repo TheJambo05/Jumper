@@ -1,4 +1,4 @@
-import '../../../data/models/product/product_model.dart';
+import '../../../../data/models/product/product_model.dart';
 
 abstract class UserProductState {
   final List<ProductModel> products;

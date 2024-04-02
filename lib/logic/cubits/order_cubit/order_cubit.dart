@@ -42,7 +42,7 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<bool> createOrder(
+  Future<bool?> createOrder(
       {required List<CartItemModel> items,
       required String paymentMethod}) async {
     emit(OrderLoadingState(state.orders));
@@ -66,6 +66,10 @@ class OrderCubit extends Cubit<OrderState> {
 
       // Clear the cart
       _cartCubit.clearCart();
+
+      if (order.status == "payment-pending") {
+        return null;
+      }
 
       return true;
     } catch (ex) {
@@ -102,10 +106,3 @@ class OrderCubit extends Cubit<OrderState> {
     return super.close();
   }
 }
-
-// Order(Backend) ---order_id---> Frontend (order_id: Payment)
-
-// Order1 -> id: 1, items: 2
-// Order2 -> id: 1, items: 2
-
-// Order1 == Order2 --> false

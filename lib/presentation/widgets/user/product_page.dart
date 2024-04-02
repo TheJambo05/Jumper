@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../data/models/product/product_model.dart';
-import '../../logic/services/formatter.dart';
-import '../screens/product/product_screen.dart';
+import '../../../data/models/product/product_model.dart';
+import '../../../logic/services/formatter.dart';
+import '../../screens/product/product_screen.dart';
 
 class ProductPage extends StatelessWidget {
   final List<ProductModel> products;

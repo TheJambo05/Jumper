@@ -4,10 +4,10 @@ import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design.dart';
-import '../../widgets/gap_widget.dart';
-import '../../widgets/link_button.dart';
-import '../../widgets/primary_button.dart';
-import '../../widgets/primary_textfield.dart';
+import '../../widgets/user/gap_widget.dart';
+import '../../widgets/user/link_button.dart';
+import '../../widgets/user/primary_button.dart';
+import '../../widgets/user/primary_textfield.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

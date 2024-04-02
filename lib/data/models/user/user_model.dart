@@ -6,7 +6,6 @@ class UserModel {
   String? phoneNumber;
   String? address;
   String? city;
-  String? state;
   int? profileProgress;
   String? id;
   String? updatedOn;
@@ -20,7 +19,6 @@ class UserModel {
       this.phoneNumber,
       this.address,
       this.city,
-      this.state,
       this.profileProgress,
       this.id,
       this.updatedOn,
@@ -34,7 +32,6 @@ class UserModel {
     phoneNumber = json['phoneNumber'];
     address = json['address'];
     city = json['city'];
-    state = json['state'];
     profileProgress = json['profileProgress'];
     id = json['id'];
     updatedOn = json['updatedOn'];
@@ -50,7 +47,6 @@ class UserModel {
     data['phoneNumber'] = this.phoneNumber;
     data['address'] = this.address;
     data['city'] = this.city;
-    data['state'] = this.state;
     data['profileProgress'] = this.profileProgress;
     data['id'] = this.id;
     data['updatedOn'] = this.updatedOn;

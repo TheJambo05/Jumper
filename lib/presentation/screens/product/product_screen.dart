@@ -7,8 +7,8 @@ import '../../../data/models/product/product_model.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/services/formatter.dart';
-import '../../widgets/gap_widget.dart';
-import '../../widgets/primary_button.dart';
+import '../../widgets/user/gap_widget.dart';
+import '../../widgets/user/primary_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productModel;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jumper/presentation/screens/admin/admin_screens/orders.dart';
-import 'package:jumper/presentation/screens/admin/admin_screens/products.dart';
-import 'package:jumper/presentation/screens/admin/admin_screens/users.dart';
-import '../home/profile_screen.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/dashboard/dash_board.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/orders/orders.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/products/products.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
 
 class AdminPanel extends StatefulWidget {
   const AdminPanel({Key? key}) : super(key: key);
@@ -16,7 +16,12 @@ class AdminPanel extends StatefulWidget {
 class _AdminPanelState extends State<AdminPanel> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [Users(), Products(), Orders()];
+  final List<Widget> _screens = const [
+    Dashboard(),
+    Users(),
+    Products(),
+    Orders(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class _AdminPanelState extends State<AdminPanel> {
           children: [
             Container(
               width: 200,
-              color: Colors.blueGrey,
+              color: Colors.black,
               child: ListView(
                 children: [
                   const Row(
@@ -38,9 +43,10 @@ class _AdminPanelState extends State<AdminPanel> {
                       ),
                     ],
                   ),
-                  _buildListItem(0, 'Users'),
-                  _buildListItem(1, 'Products'),
-                  _buildListItem(2, 'Orders'),
+                  _buildListItem(0, 'Dashboard'),
+                  _buildListItem(1, 'Users'),
+                  _buildListItem(2, 'Products'),
+                  _buildListItem(3, 'Orders'),
                 ],
               ),
             ),
@@ -55,13 +61,12 @@ class _AdminPanelState extends State<AdminPanel> {
 
   Widget _buildListItem(int index, String title) {
     return Container(
-      color:
-          _selectedIndex == index ? Colors.blueGrey[200] : Colors.transparent,
+      color: _selectedIndex == index ? Colors.white : Colors.transparent,
       child: ListTile(
         title: Text(
           title,
           style: TextStyle(
-            color: _selectedIndex == index ? Colors.white : Colors.black87,
+            color: _selectedIndex == index ? Colors.black : Colors.white,
             fontWeight:
                 _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
           ),

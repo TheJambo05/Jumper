@@ -6,6 +6,24 @@ import '../models/order/order_model.dart';
 class OrderRepository {
   final _api = Api();
 
+  Future<List<OrderModel>> fetchAllOrders() async {
+    try {
+      Response response = await _api.sendRequest.get("/order");
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return (apiResponse.data as List<dynamic>)
+          .map((json) => OrderModel.fromJson(json))
+          .toList();
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
   Future<List<OrderModel>> fetchOrdersForUser(String userId) async {
     try {
       Response response = await _api.sendRequest.get("/order/$userId");

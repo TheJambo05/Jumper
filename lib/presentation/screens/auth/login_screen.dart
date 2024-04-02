@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 import '../../../core/design.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
-import '../../widgets/gap_widget.dart';
-import '../../widgets/link_button.dart';
-import '../../widgets/primary_button.dart';
-import '../../widgets/primary_textfield.dart';
+import '../../widgets/user/gap_widget.dart';
+import '../../widgets/user/link_button.dart';
+import '../../widgets/user/primary_button.dart';
+import '../../widgets/user/primary_textfield.dart';
 import '../splash/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -46,6 +46,12 @@ class _LoginScreenState extends State<LoginScreen> {
             key: provider.formKey,
             child: ListView(padding: const EdgeInsets.all(16), children: [
               Text("Log In", style: TextStyles.heading2),
+              // Container(
+              //   width: 200,
+              //   child: Image.asset(
+              //     "assets/Sneaker.png", // Image asset for the logo
+              //   ),
+              // ),
               const GapWidget(size: -10),
               (provider.error != "")
                   ? Text(

@@ -11,9 +11,9 @@ import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/cubits/order_cubit/order_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
-import '../../widgets/cart_list_view.dart';
-import '../../widgets/gap_widget.dart';
-import '../../widgets/primary_button.dart';
+import '../../widgets/user/cart_list_view.dart';
+import '../../widgets/user/gap_widget.dart';
+import '../../widgets/user/primary_button.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   const OrderDetailScreen({super.key});
@@ -141,7 +141,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               const SizedBox(height: 20),
               PrimaryButton(
                 onPressed: () async {
-                  bool success =
+                  bool? success =
                       await BlocProvider.of<OrderCubit>(context).createOrder(
                     items: BlocProvider.of<CartCubit>(context).state.items,
                     paymentMethod:
@@ -149,7 +149,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             .paymentMethod
                             .toString(),
                   );
-                  if (success) {
+                  if (success == null) {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushNamed(context, OrderPlacedScreen.routeName);
+                  }
+                  if (success == true) {
                     Navigator.popUntil(context, (route) => route.isFirst);
                     Navigator.pushNamed(context, OrderPlacedScreen.routeName);
                   }

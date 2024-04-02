@@ -4,9 +4,9 @@ import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
-import '../../widgets/gap_widget.dart';
-import '../../widgets/primary_button.dart';
-import '../../widgets/primary_textfield.dart';
+import '../../widgets/user/gap_widget.dart';
+import '../../widgets/user/primary_button.dart';
+import '../../widgets/user/primary_textfield.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

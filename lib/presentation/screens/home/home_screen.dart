@@ -10,7 +10,7 @@ import 'package:jumper/presentation/screens/home/product_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/home/user_feed_screen.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
-import 'package:jumper/presentation/widgets/side_drawer.dart';
+import 'package:jumper/presentation/widgets/user/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

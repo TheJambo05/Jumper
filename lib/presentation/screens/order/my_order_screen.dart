@@ -6,7 +6,7 @@ import '../../../logic/cubits/order_cubit/order_cubit.dart';
 import '../../../logic/cubits/order_cubit/order_state.dart';
 import '../../../logic/services/calculations.dart';
 import '../../../logic/services/formatter.dart';
-import '../../widgets/gap_widget.dart';
+import '../../widgets/user/gap_widget.dart';
 
 class MyOrderScreen extends StatefulWidget {
   const MyOrderScreen({super.key});

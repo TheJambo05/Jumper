@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/order/my_order_screen.dart';
-import '../../logic/cubits/user_cubit/user_cubit.dart';
-import '../../logic/cubits/user_cubit/user_state.dart';
-import '../screens/auth/login_screen.dart';
+import '../../../logic/cubits/user_cubit/user_cubit.dart';
+import '../../../logic/cubits/user_cubit/user_state.dart';
+import '../../screens/auth/login_screen.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});

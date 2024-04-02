@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/presentation/widgets/admin/user_list_view.dart';
-import '../../../../logic/cubits/admin_cubits/user_cubit/user_list_cubit.dart';
-import '../../../../logic/cubits/admin_cubits/user_cubit/user_list_state.dart';
+import 'package:jumper/presentation/screens/admin/admin_screens/user/user_list_view.dart';
+import '../../../../../logic/cubits/admin_cubits/user_cubit/user_list_cubit.dart';
+import '../../../../../logic/cubits/admin_cubits/user_cubit/user_list_state.dart';
 
 class Users extends StatefulWidget {
   const Users({Key? key}) : super(key: key);

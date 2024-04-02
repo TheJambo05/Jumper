@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jumper/logic/services/formatter.dart';
 import 'package:jumper/presentation/screens/product/product_screen.dart';
 import '../../../data/models/product/product_model.dart';
@@ -12,40 +12,33 @@ class AdminProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate item width based on screen size
+    final itemWidth = screenWidth > 600 ? screenWidth / 8 : screenWidth / 4;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Products',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              DropdownButton<String>(
-                hint: const Text('Sort by'),
-                onChanged: (value) {
-                  // Implement sorting logic based on selected value
-                },
-                items: <String>['Title', 'Price', 'Date'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
               ),
             ],
           ),
         ),
         Expanded(
           child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // Adjust to display 4 items per row
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: screenWidth > 500 ? 8 : 4,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 0.7, // Adjust aspect ratio as needed
+              childAspectRatio: 0.6,
             ),
             itemCount: products.length,
             physics:
@@ -55,11 +48,11 @@ class AdminProductPage extends StatelessWidget {
 
               return CupertinoButton(
                 onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    ProductDetailsScreen.routeName,
-                    arguments: product,
-                  );
+                  // Navigator.pushNamed(
+                  //   context,
+                  //   ProductDetailsScreen.routeName,
+                  //   arguments: product,
+                  // );
                 },
                 padding: EdgeInsets.zero,
                 child: Card(
@@ -68,8 +61,8 @@ class AdminProductPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CachedNetworkImage(
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: MediaQuery.of(context).size.width / 4,
+                        width: itemWidth,
+                        height: itemWidth,
                         imageUrl: "${product.images?[0]}",
                         fit: BoxFit.cover,
                       ),

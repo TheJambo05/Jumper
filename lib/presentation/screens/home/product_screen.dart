@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/presentation/widgets/product_page.dart';
-import 'package:jumper/presentation/widgets/product_list_view.dart';
+import 'package:jumper/presentation/widgets/user/product_page.dart';
+import 'package:jumper/presentation/widgets/user/product_list_view.dart';
 import '../../../../logic/cubits/product_cubit/product_state.dart';
 import '../../../../logic/cubits/category_cubit/category_state.dart';
 import '../../../logic/cubits/category_cubit/category_cubit.dart';

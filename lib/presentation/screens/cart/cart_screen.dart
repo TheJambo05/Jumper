@@ -11,7 +11,7 @@ import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
 import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/services/calculations.dart';
 import '../../../logic/services/formatter.dart';
-import '../../widgets/cart_list_view.dart';
+import '../../widgets/user/cart_list_view.dart';
 import '../order/order_detail_screen.dart';
 
 class CartScreen extends StatefulWidget {

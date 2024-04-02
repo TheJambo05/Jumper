@@ -5,7 +5,7 @@ import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
-import '../../widgets/link_button.dart';
+import '../../widgets/user/link_button.dart';
 import '../order/my_order_screen.dart';
 import '../user/edit_profile_screen.dart';
 
