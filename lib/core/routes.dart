@@ -5,6 +5,7 @@ import 'package:jumper/presentation/screens/admin/admin_screens/dashboard/dash_b
 import 'package:jumper/presentation/screens/admin/admin_screens/products/products.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
+import 'package:jumper/presentation/screens/vendors/add_products_screen.dart';
 import 'package:provider/provider.dart';
 import '../data/models/category/category_model.dart';
 import '../data/models/product/product_model.dart';
@@ -38,6 +39,11 @@ class Routes {
             builder: (context) => ChangeNotifierProvider(
                 create: (context) => SignupProvider(context),
                 child: const SignupScreen()));
+
+      ////////////////Vendors//////////////
+      case AddProductScreen.routeName:
+        return CupertinoPageRoute(
+            builder: (context) => const AddProductScreen());
       ///////////////Admin/////////////////
       case AdminPanel.routeName:
         return CupertinoPageRoute(builder: (context) => const AdminPanel());

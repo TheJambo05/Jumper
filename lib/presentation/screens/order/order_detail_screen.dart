@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:jumper/presentation/screens/order/order_placed_screen.dart';
 import 'package:jumper/presentation/screens/order/providers/order_detail_provider.dart';
-
 import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';

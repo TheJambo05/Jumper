@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jumper/data/models/user/user_model.dart';
+import 'package:jumper/logic/services/formatter.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/user/user_profile.dart';
 
 class UserListView extends StatefulWidget {
@@ -104,7 +105,8 @@ class _UserListViewState extends State<UserListView> {
                         DataCell(Text(user.email ?? "")),
                         DataCell(Text(user.phoneNumber ?? "")),
                         DataCell(Text(user.address ?? "")),
-                        DataCell(Text(user.createdOn ?? "")),
+                        DataCell(
+                            Text(Formatter.formatDateAndTime(user.createdOn!))),
                         const DataCell(Text("Okey")),
                       ],
                       // Make the row clickable

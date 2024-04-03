@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jumper/core/design.dart';
 import 'package:jumper/data/models/user/user_model.dart';
+import 'package:jumper/logic/services/formatter.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/user/user_profile.dart';
 
 class TopUsers extends StatefulWidget {
@@ -76,7 +78,7 @@ class _TopUsersState extends State<TopUsers> {
               ),
             )),
             DataCell(Text(
-              user.createdOn ?? "",
+              Formatter.formatDateAndTime(user.createdOn!),
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 18,

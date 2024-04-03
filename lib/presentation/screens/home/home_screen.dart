@@ -10,6 +10,7 @@ import 'package:jumper/presentation/screens/home/product_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/home/user_feed_screen.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
+import 'package:jumper/presentation/screens/vendors/add_products_screen.dart';
 import 'package:jumper/presentation/widgets/user/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     ProductScreen(),
-    ProfileScreen(),
+    // ProfileScreen(),
+    AddProductScreen()
   ];
 
   @override

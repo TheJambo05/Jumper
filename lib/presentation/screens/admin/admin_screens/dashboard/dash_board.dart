@@ -55,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
           child: Column(
             children: [
               Row(
@@ -188,7 +188,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ],
               ),
-              const GapWidget(),
+              const SizedBox(height: 50),
               BlocBuilder<UserListCubit, UserListState>(
                 builder: (context, state) {
                   if (state is UserListLoadingState && state.users.isEmpty) {

@@ -15,7 +15,7 @@ class TotalProducts extends StatelessWidget {
     return BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
       return Container(
         width: MediaQuery.of(context).size.width * 0.4,
-        height: MediaQuery.of(context).size.height * 0.63,
+        height: MediaQuery.of(context).size.height * 0.62,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: AppColors.white1,
