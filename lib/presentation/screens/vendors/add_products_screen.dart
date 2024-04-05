@@ -42,6 +42,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
                   BlocBuilder<CategoryCubit, CategoryState>(
                       builder: (context, state) {
                     return DropDownTextField(
