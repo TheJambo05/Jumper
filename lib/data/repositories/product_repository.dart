@@ -7,6 +7,37 @@ import '../models/product/product_model.dart';
 class ProductRepository {
   final _api = Api();
 
+  Future<ProductModel> addProduct(
+      {required String title,
+      required String category,
+      required String description,
+      required String price}) async {
+    try {
+      Response response = await _api.sendRequest.post(
+        "/product",
+        data: jsonEncode(
+          {
+            "title": title,
+            "category": category,
+            "description": description,
+            "price": price
+          },
+        ),
+      );
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      // Handling unsuccessful response
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return ProductModel.fromJson(apiResponse.data);
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
   Future<List<ProductModel>> fetchAllProducts() async {
     try {
       Response response = await _api.sendRequest.get("/product");

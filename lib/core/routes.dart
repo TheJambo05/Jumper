@@ -6,6 +6,7 @@ import 'package:jumper/presentation/screens/admin/admin_screens/products/product
 import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/vendors/add_products_screen.dart';
+import 'package:jumper/presentation/screens/vendors/providers/add_products_provider.dart';
 import 'package:provider/provider.dart';
 import '../data/models/category/category_model.dart';
 import '../data/models/product/product_model.dart';
@@ -43,7 +44,9 @@ class Routes {
       ////////////////Vendors//////////////
       case AddProductScreen.routeName:
         return CupertinoPageRoute(
-            builder: (context) => const AddProductScreen());
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => AddProductProvider(context),
+                child: const AddProductScreen()));
       ///////////////Admin/////////////////
       case AdminPanel.routeName:
         return CupertinoPageRoute(builder: (context) => const AdminPanel());
@@ -58,7 +61,10 @@ class Routes {
         return CupertinoPageRoute(builder: (context) => const Dashboard());
       ///////////////User//////////////////
       case HomeScreen.routeName:
-        return CupertinoPageRoute(builder: (context) => const HomeScreen());
+        return CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => AddProductProvider(context),
+                child: const HomeScreen()));
 
       case ProfileScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const ProfileScreen());
