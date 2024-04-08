@@ -5,6 +5,7 @@ import 'package:jumper/logic/cubits/admin_cubits/user_cubit/user_list_cubit.dart
 import 'package:jumper/presentation/screens/admin/admin_panel.dart';
 import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 import 'core/routes.dart';
 import 'core/design.dart';
 import 'logic/cubits/cart_cubit/cart_cubit.dart';
@@ -21,7 +22,7 @@ void main() async {
 }
 
 class Jumper extends StatelessWidget {
-  const Jumper({super.key});
+  const Jumper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +43,23 @@ class Jumper extends StatelessWidget {
                   BlocProvider.of<CartCubit>(context),
                 )),
       ],
-      child: MaterialApp(
+      child: KhaltiScope(
+        publicKey: 'test_public_key_9cedb15a2f6846f38ef672c21e5356f8',
+        builder: (context, navigatorKey) => MaterialApp(
+          navigatorKey: navigatorKey,
+          supportedLocales: const [
+            Locale('en', 'US'),
+            Locale('ne', 'NP'),
+          ],
+          localizationsDelegates: const [
+            KhaltiLocalizations.delegate,
+          ],
           debugShowCheckedModeBanner: false,
           theme: Themes.defaultTheme,
           onGenerateRoute: Routes.onGenerateRoute,
-          // initialRoute: AdminPanel.routeName),
-          initialRoute: SplashScreen.routeName),
-      // initialRoute: Extra.routeName),
+          initialRoute: SplashScreen.routeName,
+        ),
+      ),
     );
   }
 }
