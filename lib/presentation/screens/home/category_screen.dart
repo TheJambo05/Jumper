@@ -1,48 +1,43 @@
+import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../logic/cubits/category_cubit/category_cubit.dart';
-import '../../../logic/cubits/category_cubit/category_state.dart';
-import '../product/category_product_screen.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class Extra extends StatefulWidget {
+  static const String routeName = "extra";
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  _ExtraState createState() => _ExtraState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _ExtraState extends State<Extra> {
+  int _index = 0;
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoryCubit, CategoryState>(builder: (context, state) {
-      if (state is CategoryLoadingState && state.categories.isEmpty) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-
-      if (state is CategoryErrorState && state.categories.isEmpty) {
-        return Center(
-          child: Text(state.message.toString()),
-        );
-      }
-
-      return ListView.builder(
-        itemCount: state.categories.length,
-        itemBuilder: (context, index) {
-          final category = state.categories[index];
-
-          return ListTile(
-            onTap: () {
-              Navigator.pushNamed(context, CategoryProductScreen.routeName,
-                  arguments: category);
-            },
-            leading: const Icon(Icons.category),
-            title: Text("${category.title}"),
-            trailing: const Icon(Icons.keyboard_arrow_right),
-          );
-        },
-      );
-    });
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Floating NavBar Example'),
+        centerTitle: true,
+      ),
+      //If you want to show body behind the navbar, it should be true
+      extendBody: true,
+      body: Center(
+        child: Text(
+          "index: $_index",
+          style: TextStyle(
+            fontSize: 52,
+          ),
+        ),
+      ),
+      bottomNavigationBar: FloatingNavbar(
+        onTap: (int val) => setState(() => _index = val),
+        currentIndex: _index,
+        items: [
+          FloatingNavbarItem(icon: Icons.home, title: 'Home'),
+          FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
+          FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
+          FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
+        ],
+      ),
+    );
   }
 }

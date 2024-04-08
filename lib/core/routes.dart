@@ -4,7 +4,9 @@ import 'package:jumper/presentation/screens/admin/admin_panel.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/dashboard/dash_board.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/products/products.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
+import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
+import 'package:jumper/presentation/screens/user/change_password.dart';
 import 'package:jumper/presentation/screens/vendors/add_products_screen.dart';
 import 'package:jumper/presentation/screens/vendors/providers/add_products_provider.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +68,9 @@ class Routes {
                 create: (context) => AddProductProvider(context),
                 child: const HomeScreen()));
 
+      case Extra.routeName:
+        return CupertinoPageRoute(builder: (context) => Extra());
+
       case ProfileScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const ProfileScreen());
 
@@ -91,6 +96,10 @@ class Routes {
       case EditProfileScreen.routeName:
         return CupertinoPageRoute(
             builder: (context) => const EditProfileScreen());
+
+      case ChangePasswordScreen.routeName:
+        return CupertinoPageRoute(
+            builder: (context) => const ChangePasswordScreen());
 
       case OrderDetailScreen.routeName:
         return CupertinoPageRoute(

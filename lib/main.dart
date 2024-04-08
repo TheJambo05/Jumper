@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/admin_cubits/user_cubit/user_list_cubit.dart';
 import 'package:jumper/presentation/screens/admin/admin_panel.dart';
+import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/splash/splash_screen.dart';
 import 'core/routes.dart';
 import 'core/design.dart';
@@ -47,6 +48,7 @@ class Jumper extends StatelessWidget {
           onGenerateRoute: Routes.onGenerateRoute,
           // initialRoute: AdminPanel.routeName),
           initialRoute: SplashScreen.routeName),
+      // initialRoute: Extra.routeName),
     );
   }
 }

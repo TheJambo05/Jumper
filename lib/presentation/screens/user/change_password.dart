@@ -10,21 +10,21 @@ import '../../widgets/user/gap_widget.dart';
 import '../../widgets/user/primary_button.dart';
 import '../../widgets/user/primary_textfield.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({super.key});
 
-  static const routeName = "edit_profile";
+  static const routeName = "change_password";
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Profile"),
+        title: const Text("Change Password"),
       ),
       body: SafeArea(
           child: BlocBuilder<UserCubit, UserState>(builder: (context, state) {
@@ -60,6 +60,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         const GapWidget(
           size: -10,
         ),
+        const PrimaryTextField(
+          labelText: "New Password",
+        ),
+        const GapWidget(),
+        const PrimaryTextField(
+          labelText: "Confirm Password",
+        ),
+        const GapWidget(),
         PrimaryTextField(
           initialValue: userModel.fullName,
           onChanged: (value) {
@@ -67,40 +75,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
           labelText: "Full Name",
         ),
-        const GapWidget(),
-        PrimaryTextField(
-          initialValue: userModel.phoneNumber,
-          onChanged: (value) {
-            userModel.phoneNumber = value;
-          },
-          labelText: "Phone Number",
-        ),
-        const GapWidget(size: 20),
-        Text("Address",
-            style: TextStyles.body1.copyWith(fontWeight: FontWeight.bold)),
-        const GapWidget(
-          size: -10,
-        ),
-        PrimaryTextField(
-          initialValue: userModel.address,
-          onChanged: (value) {
-            userModel.address = value;
-          },
-          labelText: "Address",
-        ),
-        const GapWidget(),
-        PrimaryTextField(
-          initialValue: userModel.city,
-          onChanged: (value) {
-            userModel.city = value;
-          },
-          labelText: "City",
-        ),
-        LinkButton(
-            onPressed: () {
-              Navigator.pushNamed(context, ChangePasswordScreen.routeName);
-            },
-            text: "Change Password"),
         const GapWidget(),
         const GapWidget(),
         PrimaryButton(
@@ -116,3 +90,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 }
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:jumper/presentation/widgets/user/gap_widget.dart';
+// import 'package:jumper/presentation/widgets/user/primary_textfield.dart';
+
+// class ChangePasswordScreen extends StatefulWidget {
+//   const ChangePasswordScreen({super.key});
+
+//   static const routeName = "change_password";
+
+//   @override
+//   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+// }
+
+// class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Change Password"),
+//       ),
+//       body: const Column(
+//         children: [
+//           PrimaryTextField(
+//             labelText: "New Password",
+//           ),
+//           GapWidget(),
+//           PrimaryTextField(
+//             labelText: "Confirm Password",
+//           ),
+
+//         ],
+//       ),
+//     );
+//   }
+// }
