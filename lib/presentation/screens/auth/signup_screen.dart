@@ -24,8 +24,6 @@ class _SignupScreenState extends State<SignupScreen> {
     final provider = Provider.of<SignupProvider>(context);
 
     return Scaffold(
-      appBar:
-          AppBar(centerTitle: true, elevation: 0, title: const Text("Jumper")),
       body: SafeArea(
         child: Form(
           key: provider.formKey,
