@@ -6,7 +6,6 @@ import 'package:jumper/presentation/screens/admin/admin_screens/products/product
 import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
 import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
-import 'package:jumper/presentation/screens/user/change_password.dart';
 import 'package:jumper/presentation/screens/vendors/add_products_screen.dart';
 import 'package:jumper/presentation/screens/vendors/providers/add_products_provider.dart';
 import 'package:provider/provider.dart';
@@ -44,11 +43,12 @@ class Routes {
                 child: const SignupScreen()));
 
       ////////////////Vendors//////////////
-      case AddProductScreen.routeName:
-        return CupertinoPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-                create: (context) => AddProductProvider(context),
-                child: const AddProductScreen()));
+      // case AddProductScreen.routeName:
+      //   return CupertinoPageRoute(
+      //       builder: (context) => ChangeNotifierProvider(
+      //           create: (context) => AddProductProvider(context),
+      //           child: const AddProductScreen()));
+
       ///////////////Admin/////////////////
       case AdminPanel.routeName:
         return CupertinoPageRoute(builder: (context) => const AdminPanel());
@@ -97,9 +97,15 @@ class Routes {
         return CupertinoPageRoute(
             builder: (context) => const EditProfileScreen());
 
-      case ChangePasswordScreen.routeName:
-        return CupertinoPageRoute(
-            builder: (context) => const ChangePasswordScreen());
+      // case ChangePasswordScreen.routeName:
+      //   return CupertinoPageRoute(
+      //       builder: (context) => const ChangePasswordScreen());
+
+      // case ChangePasswordScreen.routeName:
+      //   return CupertinoPageRoute(
+      //       builder: (context) => ChangeNotifierProvider(
+      //           create: (context) => PasswordProvider(context),
+      //           child: const ChangePasswordScreen()));
 
       case OrderDetailScreen.routeName:
         return CupertinoPageRoute(

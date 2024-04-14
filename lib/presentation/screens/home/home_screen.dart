@@ -6,6 +6,7 @@ import 'package:jumper/logic/cubits/cart_cubit/cart_state.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_cubit.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
 import 'package:jumper/presentation/screens/cart/cart_screen.dart';
+import 'package:jumper/presentation/screens/home/category_screen.dart';
 import 'package:jumper/presentation/screens/home/product_screen.dart';
 import 'package:jumper/presentation/screens/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/home/user_feed_screen.dart';
@@ -25,6 +26,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   List<Widget> screens = const [
+    // AddProductScreen(),
+    // Extra(),
     UserFeedScreen(),
     ProductScreen(),
     ProfileScreen(),

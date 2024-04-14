@@ -5,7 +5,7 @@ class ProductModel {
   String? title;
   String? description;
   int? price;
-  List<String>? images;
+  String? images;
   String? updatedOn;
   String? createdOn;
 
@@ -27,7 +27,7 @@ class ProductModel {
     title = json['title'];
     description = json['description'];
     price = json['price'];
-    images = json['images'].cast<String>();
+    images = json['images'];
     updatedOn = json['updatedOn'];
     createdOn = json['createdOn'];
   }

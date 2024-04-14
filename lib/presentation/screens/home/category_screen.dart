@@ -1,42 +1,39 @@
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class Extra extends StatefulWidget {
   static const String routeName = "extra";
+  final String imageUrl = 'http://localhost:5000/api/uploads/1712854725639.jpg';
 
   @override
   _ExtraState createState() => _ExtraState();
 }
 
 class _ExtraState extends State<Extra> {
-  int _index = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Floating NavBar Example'),
-        centerTitle: true,
-      ),
-      //If you want to show body behind the navbar, it should be true
-      extendBody: true,
       body: Center(
-        child: Text(
-          "index: $_index",
-          style: TextStyle(
-            fontSize: 52,
-          ),
+        child: Image.network(
+          widget.imageUrl,
+          width: 200,
+          height: 600,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) return child;
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            );
+          },
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace? stackTrace) {
+            return Text('Failed to load image');
+          },
         ),
-      ),
-      bottomNavigationBar: FloatingNavbar(
-        onTap: (int val) => setState(() => _index = val),
-        currentIndex: _index,
-        items: [
-          FloatingNavbarItem(icon: Icons.home, title: 'Home'),
-          FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-          FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
-          FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
-        ],
       ),
     );
   }

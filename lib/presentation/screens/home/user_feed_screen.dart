@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../../../logic/cubits/product_cubit/product_cubit.dart';
 import '../../../logic/cubits/product_cubit/product_state.dart';
 import '../product/product_screen.dart';
+
+const String finalUrl = "http://192.168.1.70:5000/api/uploads/";
 
 class UserFeedScreen extends StatefulWidget {
   const UserFeedScreen({super.key});
@@ -70,7 +71,7 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
                                 child: CachedNetworkImage(
                                   width: 120,
                                   height: 120,
-                                  imageUrl: "${product.images?[0]}",
+                                  imageUrl: "$finalUrl${product.images}",
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator()),

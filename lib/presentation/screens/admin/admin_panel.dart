@@ -3,6 +3,7 @@ import 'package:jumper/presentation/screens/admin/admin_screens/dashboard/dash_b
 import 'package:jumper/presentation/screens/admin/admin_screens/orders/orders.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/products/products.dart';
 import 'package:jumper/presentation/screens/admin/admin_screens/user/users.dart';
+import 'package:jumper/presentation/widgets/user/gap_widget.dart';
 
 class AdminPanel extends StatefulWidget {
   const AdminPanel({Key? key}) : super(key: key);
@@ -39,8 +40,14 @@ class _AdminPanelState extends State<AdminPanel> {
                     children: [
                       Text(
                         "Jumper",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20),
                       ),
+                      SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
                   _buildListItem(0, 'Dashboard'),

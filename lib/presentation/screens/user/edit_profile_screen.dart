@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/presentation/screens/user/change_password.dart';
+import 'package:jumper/presentation/screens/user/change_password/change_password.dart';
 import 'package:jumper/presentation/widgets/user/link_button.dart';
 import '../../../core/design.dart';
 import '../../../data/models/user/user_model.dart';
@@ -96,11 +96,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
           labelText: "City",
         ),
-        LinkButton(
-            onPressed: () {
-              Navigator.pushNamed(context, ChangePasswordScreen.routeName);
-            },
-            text: "Change Password"),
+        // LinkButton(
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, ChangePasswordScreen.routeName);
+        //     },
+        //     text: "Change Password"),
         const GapWidget(),
         const GapWidget(),
         PrimaryButton(

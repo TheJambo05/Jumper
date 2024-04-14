@@ -5,8 +5,11 @@ import '../../../data/models/product/product_model.dart';
 import '../../../logic/services/formatter.dart';
 import '../../screens/product/product_screen.dart';
 
+const String finalUrl = "http://192.168.1.70:5000/api/uploads/";
+
 class ProductPage extends StatelessWidget {
   final List<ProductModel> products;
+
   const ProductPage({super.key, required this.products});
 
   @override
@@ -38,11 +41,19 @@ class ProductPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CachedNetworkImage(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: MediaQuery.of(context).size.width / 2,
-                  imageUrl: "${product.images?[0]}",
-                  fit: BoxFit.cover,
+                Expanded(
+                  child: CachedNetworkImage(
+                    imageUrl: product.images != null &&
+                            product.images!.isNotEmpty
+                        ? "$finalUrl${product.images}"
+                        : 'http://placehold.it/200x200', // Placeholder image
+                    width: MediaQuery.of(context).size.width / 2,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        const Center(child: Icon(Icons.error)),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -50,7 +61,7 @@ class ProductPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${product.title}",
+                        product.title ?? 'Product Title',
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

@@ -58,6 +58,7 @@ class Jumper extends StatelessWidget {
           theme: Themes.defaultTheme,
           onGenerateRoute: Routes.onGenerateRoute,
           initialRoute: SplashScreen.routeName,
+          // initialRoute: AdminPanel.routeName,
         ),
       ),
     );

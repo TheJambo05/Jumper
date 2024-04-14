@@ -90,6 +90,24 @@ class UserRepository {
     }
   }
 
+  Future<UserModel> changePassword(UserModel userModel) async {
+    try {
+      Response response = await _api.sendRequest.put(
+          "/user/${userModel.sId}/changePassword",
+          data: jsonEncode(userModel.toJson()));
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return UserModel.fromJson(apiResponse.data);
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
   Future<void> removeUser(String userId) async {
     try {
       // Send DELETE request to remove user
