@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 const String BASE_URL = "http://192.168.1.70:5000/api";
+const String finalUrl = "http://192.168.1.70:5000/api/uploads/";
 const Map<String, dynamic> DEFAULT_HEADERS = {
   "Content-Type": "application/json"
 };

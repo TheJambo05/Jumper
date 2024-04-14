@@ -105,7 +105,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     return CartListView(
                       items: state.items,
                       shrinkWrap: true,
-                      noScroll: true,
                     );
                   },
                 ),

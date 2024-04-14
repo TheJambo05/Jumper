@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/core/api.dart';
+import 'package:jumper/presentation/screens/product/product_screen.dart';
 import '../../../core/design.dart';
 import '../../../logic/cubits/order_cubit/order_cubit.dart';
 import '../../../logic/cubits/order_cubit/order_state.dart';
@@ -80,7 +82,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                         return ListTile(
                             contentPadding: EdgeInsets.zero,
                             leading: CachedNetworkImage(
-                              imageUrl: product.images![0],
+                              imageUrl: finalUrl + product.images!,
                             ),
                             title: Text("${product.title}"),
                             subtitle: Text("Qty: ${item.quantity}"),

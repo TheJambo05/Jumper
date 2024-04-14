@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:jumper/core/api.dart';
 import 'package:jumper/presentation/screens/product/product_screen.dart';
 import '../../../data/models/cart/cart_item_model.dart';
 import '../../../logic/cubits/cart_cubit/cart_cubit.dart';

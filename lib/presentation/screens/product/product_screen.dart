@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:jumper/core/api.dart';
 import 'package:jumper/presentation/widgets/user/product_page.dart';
 import '../../../core/design.dart';
 import '../../../data/models/product/product_model.dart';
@@ -10,8 +11,6 @@ import '../../../logic/cubits/cart_cubit/cart_state.dart';
 import '../../../logic/services/formatter.dart';
 import '../../widgets/user/gap_widget.dart';
 import '../../widgets/user/primary_button.dart';
-
-const String finalUrl = "http://192.168.1.70:5000/api/uploads/";
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productModel;

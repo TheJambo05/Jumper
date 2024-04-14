@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jumper/core/api.dart';
 import '../../../data/models/product/product_model.dart';
 import '../../../logic/services/formatter.dart';
 import '../../screens/product/product_screen.dart';
-
-const String finalUrl = "http://192.168.1.70:5000/api/uploads/";
 
 class ProductPage extends StatelessWidget {
   final List<ProductModel> products;
@@ -19,7 +18,8 @@ class ProductPage extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 0.74,
+        childAspectRatio: 0.75,
+        // Removed the childAspectRatio to allow images to define their own height
       ),
       itemCount: products.length,
       physics:
@@ -41,14 +41,15 @@ class ProductPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                AspectRatio(
+                  aspectRatio: 1, // Square aspect ratio for the image
                   child: CachedNetworkImage(
                     imageUrl: product.images != null &&
                             product.images!.isNotEmpty
                         ? "$finalUrl${product.images}"
                         : 'http://placehold.it/200x200', // Placeholder image
                     width: MediaQuery.of(context).size.width / 2,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain, // Changed to BoxFit.contain
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
