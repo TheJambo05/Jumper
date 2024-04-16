@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jumper/presentation/screens/vendors/providers/add_products_provider.dart';
-import 'package:jumper/presentation/widgets/user/dropdown_textfield.dart'; // Ensure this path is correct
+import 'package:jumper/presentation/widgets/user/dropdown_textfield.dart';
 import 'package:jumper/presentation/widgets/user/gap_widget.dart';
 import 'package:jumper/presentation/widgets/user/primary_button.dart';
 import 'package:jumper/presentation/widgets/user/primary_textfield.dart';
+import 'package:jumper/presentation/widgets/vendor/image_picker';
 import 'package:provider/provider.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -36,20 +37,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                ImagePickerWidget(
+                  onImagePicked: provider.setImageFile,
+                ),
+                const GapWidget(),
                 PrimaryDropdownField(
                   labelText: "Category",
-                  value: provider.category, // Using the string directly
+                  value: provider.category,
                   items: const [
                     DropdownMenuItem(value: "Mens", child: Text("Mens")),
                     DropdownMenuItem(value: "Womens", child: Text("Womens")),
                     DropdownMenuItem(value: "Unisex", child: Text("Unisex")),
                   ],
                   onChanged: (String? newValue) {
-                    provider.category =
-                        newValue; // Update the category directly in provider
+                    provider.category = newValue;
                   },
                 ),
-                const GapWidget(), // Assuming this adds some vertical spacing
+                const GapWidget(),
                 PrimaryTextField(
                   controller: provider.titleController,
                   labelText: "Name of Product",

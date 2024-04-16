@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_state.dart';
 
 class AddProductProvider with ChangeNotifier {
@@ -12,51 +13,59 @@ class AddProductProvider with ChangeNotifier {
 
   bool isLoading = false;
   String error = "";
-  String? category; // Directly using a String to hold the category
+  String? category;
+  File? imageFile;
 
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  StreamSubscription? _addProductSubscription;
+
+  StreamSubscription? _productSubscription;
 
   void _listenToProductCubit() {
-    _addProductSubscription =
-        BlocProvider.of<ProductCubit>(context).stream.listen(
+    _productSubscription = BlocProvider.of<ProductCubit>(context).stream.listen(
       (productState) {
         if (productState is ProductLoadingState) {
           isLoading = true;
           error = "";
-          notifyListeners();
         } else if (productState is ProductErrorState) {
           isLoading = false;
           error = productState.message;
-          notifyListeners();
         } else {
           isLoading = false;
           error = "";
-          notifyListeners();
         }
+        notifyListeners();
       },
     );
   }
 
+  void setImageFile(File newFile) {
+    imageFile = newFile;
+    notifyListeners();
+  }
+
   void addProduct() async {
     if (!formKey.currentState!.validate()) return;
-    String category = this.category ?? ""; // Use the selected category
+
+    String category = this.category ?? "";
     String title = titleController.text.trim();
     String description = descriptionController.text.trim();
     String price = priceController.text.trim();
+
     BlocProvider.of<ProductCubit>(context).addProduct(
-        category: category,
-        title: title,
-        description: description,
-        price: price);
+      category: category,
+      title: title,
+      description: description,
+      price: price,
+      imageFile: imageFile,
+    );
   }
 
   @override
   void dispose() {
-    _addProductSubscription?.cancel();
+    _productSubscription?.cancel();
     titleController.dispose();
     descriptionController.dispose();
     priceController.dispose();
