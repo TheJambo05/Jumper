@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/data/models/product/product_model.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_state.dart';
@@ -15,6 +17,7 @@ class ProductCubit extends Cubit<ProductState> {
     required String category,
     required String description,
     required String price,
+    File? imageFile,
   }) async {
     emit(ProductLoadingState(state.products));
 

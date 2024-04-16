@@ -43,11 +43,11 @@ class Routes {
                 child: const SignupScreen()));
 
       ////////////////Vendors//////////////
-      // case AddProductScreen.routeName:
-      //   return CupertinoPageRoute(
-      //       builder: (context) => ChangeNotifierProvider(
-      //           create: (context) => AddProductProvider(context),
-      //           child: const AddProductScreen()));
+      case AddProductScreen.routeName:
+        return CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => AddProductProvider(context),
+                child: const AddProductScreen()));
 
       ///////////////Admin/////////////////
       case AdminPanel.routeName:

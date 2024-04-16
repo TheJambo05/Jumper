@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:jumper/logic/cubits/cart_cubit/cart_state.dart';
@@ -26,9 +27,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   List<Widget> screens = const [
-    // AddProductScreen(),
+    AddProductScreen(),
     // Extra(),
-    UserFeedScreen(),
+    // UserFeedScreen(),
     ProductScreen(),
     ProfileScreen(),
     // AddProductScreen()
@@ -47,8 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Jumper",
+              SizedBox(
+                height: 80,
+                width: 100,
+                child: Image(
+                  image: AssetImage("assets/Jumper.png"),
+                ),
               ),
             ],
           ),

@@ -12,8 +12,8 @@ class AddProductProvider with ChangeNotifier {
 
   bool isLoading = false;
   String error = "";
+  String? category; // Directly using a String to hold the category
 
-  final categoryController = TextEditingController();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
@@ -43,7 +43,7 @@ class AddProductProvider with ChangeNotifier {
 
   void addProduct() async {
     if (!formKey.currentState!.validate()) return;
-    String category = titleController.text.trim();
+    String category = this.category ?? ""; // Use the selected category
     String title = titleController.text.trim();
     String description = descriptionController.text.trim();
     String price = priceController.text.trim();
@@ -57,6 +57,9 @@ class AddProductProvider with ChangeNotifier {
   @override
   void dispose() {
     _addProductSubscription?.cancel();
+    titleController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
     super.dispose();
   }
 }
