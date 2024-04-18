@@ -27,6 +27,7 @@ class ProductCubit extends Cubit<ProductState> {
         category: category,
         description: description,
         price: price,
+        images: imageFile,
       );
       List<ProductModel> updatedProducts = List.from(state.products)
         ..add(productModel);

@@ -49,11 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 80,
-                width: 100,
-                child: Image(
-                  image: AssetImage("assets/Jumper.png"),
-                ),
+                child: Text("Jumper"),
+                // height: 80,
+                // width: 100,
+                // child: Image(
+                //   image: AssetImage("assets/Jumper.png"),
+                // ),
               ),
             ],
           ),

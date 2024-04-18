@@ -1,31 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/cart_cubit/cart_state.dart';
 import 'package:provider/provider.dart';
 import 'package:jumper/presentation/screens/order/order_placed_screen.dart';
 import 'package:jumper/presentation/screens/order/providers/order_detail_provider.dart';
-import '../../../core/design.dart';
-import '../../../data/models/user/user_model.dart';
-import '../../../logic/cubits/cart_cubit/cart_cubit.dart';
-import '../../../logic/cubits/cart_cubit/cart_state.dart';
-import '../../../logic/cubits/order_cubit/order_cubit.dart';
-import '../../../logic/cubits/user_cubit/user_cubit.dart';
-import '../../../logic/cubits/user_cubit/user_state.dart';
-import '../../widgets/user/cart_list_view.dart';
-import '../../widgets/user/gap_widget.dart';
-import '../../widgets/user/primary_button.dart';
+import 'package:jumper/presentation/widgets/user/cart_list_view.dart';
+import 'package:jumper/presentation/widgets/user/primary_button.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
+import 'package:jumper/logic/cubits/cart_cubit/cart_cubit.dart';
+import 'package:jumper/logic/cubits/order_cubit/order_cubit.dart';
+import 'package:jumper/logic/cubits/user_cubit/user_cubit.dart';
+import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
 
 class OrderDetailScreen extends StatefulWidget {
-  const OrderDetailScreen({super.key});
-
-  static const routeName = "order_detail";
+  const OrderDetailScreen({Key? key}) : super(key: key);
+  static const routeName = "/order-detail";
 
   @override
   State<OrderDetailScreen> createState() => _OrderDetailScreenState();
 }
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
+  void _showPaymentError(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Payment Failed"),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _createOrder(BuildContext context) async {
+    final success = await BlocProvider.of<OrderCubit>(context).createOrder(
+      items: BlocProvider.of<CartCubit>(context).state.items,
+      paymentMethod: Provider.of<OrderDetailProvider>(context, listen: false)
+          .paymentMethod
+          .toString(),
+    );
+    if (success == true || success == null) {
+      Navigator.popUntil(context, (route) => route.isFirst);
+      Navigator.pushNamed(context, OrderPlacedScreen.routeName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final orderProvider = Provider.of<OrderDetailProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Order Details"),
@@ -48,24 +78,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   }
 
                   if (state is UserLoggedInState) {
-                    UserModel user = state.userModel;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Name: ${user.fullName}",
+                          "Name: ${state.userModel.fullName}",
                           style: const TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Email: ${user.email}",
+                          "Email: ${state.userModel.email}",
                           style: const TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Phone: ${user.phoneNumber}",
+                          "Phone: ${state.userModel.phoneNumber}",
                           style: const TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Address: ${user.address}, ${user.city}",
+                          "Address: ${state.userModel.address}, ${state.userModel.city}",
                           style: const TextStyle(fontSize: 16),
                         ),
                       ],
@@ -115,45 +144,51 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              Consumer<OrderDetailProvider>(
-                builder: (context, provider, child) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RadioListTile(
-                        value: "pay-on-delivery",
-                        groupValue: provider.paymentMethod,
-                        onChanged: provider.changePaymentMethod,
-                        title: const Text("Pay on Delivery"),
-                      ),
-                      RadioListTile(
-                        value: "pay-now",
-                        groupValue: provider.paymentMethod,
-                        onChanged: provider.changePaymentMethod,
-                        title: const Text("Pay Now"),
-                      ),
-                    ],
-                  );
+              RadioListTile(
+                value: "pay-on-delivery",
+                groupValue: orderProvider.paymentMethod,
+                onChanged: (String? value) {
+                  orderProvider.changePaymentMethod(value);
                 },
+                title: const Text("Pay on Delivery"),
+              ),
+              RadioListTile(
+                value: "pay-now",
+                groupValue: orderProvider.paymentMethod,
+                onChanged: (String? value) {
+                  orderProvider.changePaymentMethod(value);
+                },
+                title: const Text("Pay Now"),
               ),
               const SizedBox(height: 20),
               PrimaryButton(
                 onPressed: () async {
-                  bool? success =
-                      await BlocProvider.of<OrderCubit>(context).createOrder(
-                    items: BlocProvider.of<CartCubit>(context).state.items,
-                    paymentMethod:
-                        Provider.of<OrderDetailProvider>(context, listen: false)
-                            .paymentMethod
-                            .toString(),
-                  );
-                  if (success == null) {
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                    Navigator.pushNamed(context, OrderPlacedScreen.routeName);
-                  }
-                  if (success == true) {
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                    Navigator.pushNamed(context, OrderPlacedScreen.routeName);
+                  if (orderProvider.paymentMethod == "pay-now") {
+                    // Initiate Khalti payment
+                    final config = PaymentConfig(
+                      amount: 10, // Will be Replaced with the actual amount
+                      productIdentity: 'your-product-id',
+                      productName: 'Product Name',
+                    );
+
+                    KhaltiScope.of(context).pay(
+                      config: config,
+                      onSuccess: (success) {
+                        // Handle successful payment and place the order
+                        _createOrder(context);
+                      },
+                      onFailure: (error) {
+                        // Handle payment failure
+                        _showPaymentError(context, error.message);
+                      },
+                      onCancel: () {
+                        // Handle payment cancellation
+                        print("Payment Cancelled");
+                      },
+                    );
+                  } else {
+                    // If payment method is not 'pay-now', proceed with order creation
+                    _createOrder(context);
                   }
                 },
                 text: "Place Order",

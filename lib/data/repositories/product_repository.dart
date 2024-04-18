@@ -13,7 +13,7 @@ class ProductRepository {
     required String category,
     required String description,
     required String price,
-    File? imageFile,
+    File? images,
   }) async {
     try {
       FormData formData = FormData.fromMap({
@@ -23,11 +23,13 @@ class ProductRepository {
         "price": price,
       });
 
-      if (imageFile != null) {
+      if (images != null) {
         formData.files.add(MapEntry(
-          "image",
-          await MultipartFile.fromFile(imageFile.path,
-              filename: imageFile.path.split('/').last),
+          "images",
+          await MultipartFile.fromFile(
+            images.path,
+            filename: images.path.split('/').last,
+          ),
         ));
       }
 
