@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import '../../core/api.dart';
-import '../models/cart/cart_item_model.dart';
+import 'package:jumper/core/api.dart';
+import 'package:jumper/data/models/cart/cart_item_model.dart';
 
 class CartRepository {
   final _api = Api();

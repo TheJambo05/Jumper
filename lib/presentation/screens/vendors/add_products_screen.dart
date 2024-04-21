@@ -25,7 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         child: Form(
           key: provider.formKey,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,6 +41,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   onImagePicked: provider.setImageFile,
                 ),
                 const GapWidget(),
+                const Text(
+                  "Write your product name",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 10),
+                PrimaryTextField(
+                  controller: provider.titleController,
+                  labelText: "Name of Product",
+                ),
+                const GapWidget(),
+                const Text(
+                  "Select your product Category",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 10),
                 PrimaryDropdownField(
                   labelText: "Category",
                   value: provider.category,
@@ -54,39 +69,53 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   },
                 ),
                 const GapWidget(),
-                PrimaryTextField(
-                  controller: provider.titleController,
-                  labelText: "Name of Product",
-                ),
-                const SizedBox(height: 10),
                 const Text(
-                  "Write your product name",
+                  "Describe your Product Here",
                   style: TextStyle(color: Colors.grey),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 PrimaryTextField(
                   controller: provider.descriptionController,
                   labelText: "Description",
                 ),
-                const SizedBox(height: 10),
-                const Text(
-                  "Describe your product briefly",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(height: 20),
-                PrimaryTextField(
-                  controller: provider.priceController,
-                  labelText: "Price",
-                ),
-                const SizedBox(height: 10),
+                const GapWidget(),
                 const Text(
                   "Enter the price of your product",
                   style: TextStyle(color: Colors.grey),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                PrimaryTextField(
+                  controller: provider.priceController,
+                  labelText: "Price",
+                ),
+                const GapWidget(),
                 Center(
                   child: PrimaryButton(
-                    onPressed: provider.isLoading ? null : provider.addProduct,
+                    onPressed: provider.isLoading
+                        ? null
+                        : () {
+                            final validationMessage = provider.validateForm();
+                            if (validationMessage != null) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Validation Error'),
+                                  content: Text(validationMessage),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Dismiss the dialog
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              provider.addProduct();
+                            }
+                          },
                     text: provider.isLoading ? "Loading..." : "Add Product",
                   ),
                 ),

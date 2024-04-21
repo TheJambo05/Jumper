@@ -14,6 +14,7 @@ class ProductRepository {
     required String description,
     required String price,
     File? images,
+    required String userId,
   }) async {
     try {
       FormData formData = FormData.fromMap({
@@ -21,6 +22,7 @@ class ProductRepository {
         "category": category,
         "description": description,
         "price": price,
+        "user": userId,
       });
 
       if (images != null) {

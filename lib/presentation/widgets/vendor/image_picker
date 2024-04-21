@@ -27,7 +27,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column( 
       children: [
         if (_imageFile != null)
           Image.file(
@@ -41,6 +41,6 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           child: const Text('Pick Image'),
         ),
       ],
-    );
+    ); 
   }
 }

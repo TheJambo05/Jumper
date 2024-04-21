@@ -32,9 +32,12 @@ class AddProductProvider with ChangeNotifier {
         } else if (productState is ProductErrorState) {
           isLoading = false;
           error = productState.message;
+        } else if (productState is ProductAddedState) {
+          isLoading = false;
+          resetForm();
+          showMessage("Product successfully added!");
         } else {
           isLoading = false;
-          error = "";
         }
         notifyListeners();
       },
@@ -46,8 +49,20 @@ class AddProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addProduct() async {
+  void resetForm() {
+    titleController.clear();
+    descriptionController.clear();
+    priceController.clear();
+    category = null;
+    imageFile = null;
+    formKey.currentState?.reset();
+    notifyListeners();
+  }
+
+  void addProduct() {
     if (!formKey.currentState!.validate()) return;
+    isLoading = true;
+    notifyListeners();
 
     String category = this.category ?? "";
     String title = titleController.text.trim();
@@ -61,6 +76,30 @@ class AddProductProvider with ChangeNotifier {
       price: price,
       imageFile: imageFile,
     );
+  }
+
+  String? validateForm() {
+    if (imageFile == null) return "Please upload an image for the product.";
+    if (titleController.text.trim().isEmpty) {
+      return "Please enter the name of the product.";
+    }
+    if (category == null || category!.isEmpty) {
+      return "Please select a category for the product.";
+    }
+    if (descriptionController.text.trim().isEmpty) {
+      return "Please provide a description for the product.";
+    }
+    if (priceController.text.trim().isEmpty) {
+      return "Please enter the price of the product.";
+    }
+    final price = double.tryParse(priceController.text.trim());
+    if (price == null) return "Price must be a valid number.";
+    return null; // If all validations pass
+  }
+
+  void showMessage(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override

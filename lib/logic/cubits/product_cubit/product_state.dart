@@ -17,6 +17,10 @@ class ProductLoadedState extends ProductState {
   ProductLoadedState(super.products);
 }
 
+class ProductAddedState extends ProductState {
+  ProductAddedState(super.products);
+}
+
 class ProductErrorState extends ProductState {
   final String message;
   ProductErrorState(this.message, super.products);

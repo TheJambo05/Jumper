@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/presentation/screens/admin/admin_panel.dart';
 import '../../../logic/cubits/user_cubit/user_cubit.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
 import '../auth/login_screen.dart';
@@ -19,6 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void goToNextScreen() {
     UserState userState = BlocProvider.of<UserCubit>(context).state;
     if (userState is UserLoggedInState) {
+      Navigator.popUntil(context, (route) => route.isFirst);
+      Navigator.pushReplacementNamed(context, AdminPanel.routeName);
+    } else if (userState is UserLoggedInState) {
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } else if (userState is UserLoggedOutState) {
